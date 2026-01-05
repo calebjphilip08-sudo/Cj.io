@@ -55,8 +55,15 @@
             large: '18px',
             xlarge: '20px'
         };
+        
+        // Remove any existing text size classes
+        document.body.classList.remove('text-small', 'text-normal', 'text-large', 'text-xlarge');
+        
+        // Add new text size class
+        document.body.classList.add('text-' + settings.textSize);
+        
+        // Set CSS custom property
         document.documentElement.style.setProperty('--base-text-size', textSizes[settings.textSize] || '16px');
-        document.body.style.fontSize = textSizes[settings.textSize] || '16px';
 
         // Apply reduce motion
         if (settings.reduceMotion) {

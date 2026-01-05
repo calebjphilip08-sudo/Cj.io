@@ -13,15 +13,35 @@
     --gray: #5a5a5a;
     --border: #d4cfc4;
     --dark-text: #1a1a1a;
+    --base-text-size: 16px;
+    --transition-speed: 0.8s;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     background: var(--light);
+    font-size: var(--base-text-size);
     color: var(--dark-text);
     line-height: 1.7;
     overflow-x: hidden;
     font-weight: 400;
+}
+
+/* Text Size Classes */
+body.text-small {
+    --base-text-size: 14px;
+}
+
+body.text-normal {
+    --base-text-size: 16px;
+}
+
+body.text-large {
+    --base-text-size: 18px;
+}
+
+body.text-xlarge {
+    --base-text-size: 20px;
 }
 
 /* Subtle text shadow for all text */
@@ -1393,7 +1413,8 @@ body.sidebar-mode .dropdown-content a:hover {
 /* Adjust content when sidebar is active */
 body.sidebar-mode .page-content-wrapper,
 body.sidebar-mode .hero,
-body.sidebar-mode footer {
+body.sidebar-mode .settings-container,
+body.sidebar-mode .feedback-container {
     margin-left: 250px;
 }
 
@@ -1404,7 +1425,7 @@ body.sidebar-mode .full-page-embed {
 
 /* Settings Gear Icon */
 .settings-icon {
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -1416,18 +1437,25 @@ body.sidebar-mode .full-page-embed {
 }
 
 body.sidebar-mode .settings-icon {
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 /* Fix footer in sidebar mode */
 body.sidebar-mode footer {
     width: calc(100% - 250px);
     margin-left: 250px;
+    position: relative;
+    left: 0;
+    clear: both;
+}
+
+body.sidebar-mode .page-content-wrapper {
+    min-height: calc(100vh - 200px);
 }
 
 /* Sidebar Mode */
 body.sidebar-mode {
-    margin-left: 250px;
+    /* Removed margin-left from body to prevent double margins */
 }
 
 body.sidebar-mode header {
