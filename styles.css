@@ -1395,7 +1395,6 @@ body.sidebar-mode .dropdown-content a:hover {
 
 /* Adjust content when sidebar is active */
 body.sidebar-mode .page-content-wrapper,
-body.sidebar-mode .hero,
 body.sidebar-mode .settings-container,
 body.sidebar-mode .feedback-container {
     margin-left: 250px;
@@ -1425,11 +1424,7 @@ body.sidebar-mode .settings-icon {
 
 /* Fix footer in sidebar mode */
 body.sidebar-mode footer {
-    width: calc(100% - 250px);
     margin-left: 250px;
-    position: relative;
-    left: 0;
-    clear: both;
 }
 
 body.sidebar-mode .page-content-wrapper {
