@@ -62,6 +62,7 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="showTab('videos')">Videos</button>
             <button class="tab-btn" onclick="showTab('shorts')">Shorts</button>
+            <button class="tab-btn" onclick="showTab('streams')">Streams</button>
         </div>
 
         <div id="videos-content">
@@ -79,6 +80,14 @@
                 </p>
             </div>
         </div>
+
+        <div id="streams-content" style="display: none;">
+            <div class="video-grid" id="streams-grid">
+                <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                    Loading streams...
+                </p>
+            </div>
+        </div>
     </section>
 
     <footer>
@@ -93,6 +102,7 @@
         let currentChannel = 'reviews'; // Default to reviews channel
         let allVideos = { reviews: [], gaming: [] };
         let allShorts = { reviews: [], gaming: [] };
+        let allStreams = { reviews: [], gaming: [] };
 
         // Channel selection
         function selectChannel(channel) {
@@ -121,10 +131,13 @@
             
             // Reload current tab
             const activeTab = document.querySelector('.tab-btn.active');
-            if (activeTab.textContent === 'Videos') {
+            const tabText = activeTab.textContent.trim();
+            if (tabText === 'Videos') {
                 displayVideos();
-            } else {
+            } else if (tabText === 'Shorts') {
                 displayShorts();
+            } else if (tabText === 'Streams') {
+                displayStreams();
             }
         }
 
@@ -132,6 +145,7 @@
         function showTab(tab) {
             const videosContent = document.getElementById('videos-content');
             const shortsContent = document.getElementById('shorts-content');
+            const streamsContent = document.getElementById('streams-content');
             const tabs = document.querySelectorAll('.tab-btn');
             
             tabs.forEach(t => t.classList.remove('active'));
@@ -139,18 +153,26 @@
             if (tab === 'videos') {
                 videosContent.style.display = 'block';
                 shortsContent.style.display = 'none';
+                streamsContent.style.display = 'none';
                 tabs[0].classList.add('active');
                 displayVideos();
-            } else {
+            } else if (tab === 'shorts') {
                 videosContent.style.display = 'none';
                 shortsContent.style.display = 'block';
+                streamsContent.style.display = 'none';
                 tabs[1].classList.add('active');
                 displayShorts();
+            } else if (tab === 'streams') {
+                videosContent.style.display = 'none';
+                shortsContent.style.display = 'none';
+                streamsContent.style.display = 'block';
+                tabs[2].classList.add('active');
+                displayStreams();
             }
         }
 
         // Fetch videos from YouTube RSS feed
-        async function fetchYouTubeVideos(channelId, isShorts = false) {
+        async function fetchYouTubeVideos(channelId, type = 'videos') {
             try {
                 const rssUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
                 const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
@@ -158,10 +180,17 @@
                 
                 if (data.items) {
                     return data.items.filter(item => {
-                        if (isShorts) {
-                            return item.title.toLowerCase().includes('short') || item.link.includes('/shorts/');
+                        const title = item.title.toLowerCase();
+                        const isShort = item.link.includes('/shorts/');
+                        const isStream = title.includes('live') || title.includes('stream') || title.includes('🔴');
+                        
+                        if (type === 'shorts') {
+                            return isShort;
+                        } else if (type === 'streams') {
+                            return isStream && !isShort;
                         } else {
-                            return !item.link.includes('/shorts/');
+                            // Regular videos: not shorts and not streams
+                            return !isShort && !isStream;
                         }
                     });
                 }
@@ -233,12 +262,56 @@
             renderVideos(shorts, 'shorts-grid');
         }
 
+        // Display streams based on selected channel
+        function displayStreams() {
+            let streams = [];
+            
+            if (currentChannel === 'reviews') {
+                streams = allStreams.reviews;
+            } else if (currentChannel === 'gaming') {
+                streams = allStreams.gaming;
+            } else {
+                streams = [...allStreams.reviews, ...allStreams.gaming]
+                    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            }
+            
+            streams = streams.slice(0, 12);
+            
+            // Add special styling for streams
+            const grid = document.getElementById('streams-grid');
+            
+            if (streams.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">No streams found. Check back later for live content!</p>';
+                return;
+            }
+            
+            grid.innerHTML = streams.map(video => {
+                const videoId = video.link.split('v=')[1] || video.link.split('/shorts/')[1];
+                const thumbnail = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                
+                return `
+                    <div class="video-card" onclick="window.open('${video.link}', '_blank')">
+                        <div class="video-thumbnail">
+                            <img src="${thumbnail}" alt="${video.title}" loading="lazy">
+                            <span style="position: absolute; top: 8px; right: 8px; background: #c41e3a; color: white; padding: 4px 8px; border-radius: 3px; font-size: 0.75rem; font-weight: 600;">🔴 STREAM</span>
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">${video.title}</div>
+                            <div class="video-meta">${new Date(video.pubDate).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
         // Load all videos
         async function loadAllContent() {
-            allVideos.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, false);
-            allVideos.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, false);
-            allShorts.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, true);
-            allShorts.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, true);
+            allVideos.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, 'videos');
+            allVideos.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, 'videos');
+            allShorts.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, 'shorts');
+            allShorts.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, 'shorts');
+            allStreams.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, 'streams');
+            allStreams.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, 'streams');
             
             displayVideos();
         }
