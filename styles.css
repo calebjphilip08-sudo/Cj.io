@@ -186,10 +186,10 @@ nav {
     max-width: 1400px;
     margin: 0 auto;
     padding: 5rem 2rem 4rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 5rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .hero-content h1 {
@@ -225,6 +225,7 @@ nav {
 .social-links {
     display: flex;
     gap: 1rem;
+    justify-content: center;
 }
 
 .social-links a {
@@ -249,10 +250,7 @@ nav {
 }
 
 .hero-visual {
-    position: relative;
-    height: 450px;
-    width: 100%;
-    min-width: 500px;
+    display: none;
 }
 
 .visual-box {
@@ -686,16 +684,11 @@ footer {
 /* Responsive */
 @media (max-width: 968px) {
     .hero {
-        grid-template-columns: 1fr;
         padding: 3rem 2rem;
     }
     
     .hero-content h1 {
         font-size: 3.5rem;
-    }
-    
-    .hero-visual {
-        display: none;
     }
     
     .featured-grid {
