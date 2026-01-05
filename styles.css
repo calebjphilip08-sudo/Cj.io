@@ -24,6 +24,16 @@ body {
     font-weight: 400;
 }
 
+/* Subtle text shadow for all text */
+h1, h2, h3, h4, h5, h6, p, a, span, li {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Stronger shadow for headings */
+h1, h2, h3 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
 /* Hide scrollbar but keep scroll functionality */
 html {
     scrollbar-width: none; /* Firefox */
@@ -647,7 +657,7 @@ section {
     background: white;
     padding: 3rem;
     border-radius: 4px;
-    border: 2px solid var(--border);
+    border: 3px solid var(--accent);
     text-align: center;
     transition: all 0.9s ease-in-out;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
@@ -655,6 +665,14 @@ section {
     overflow: hidden;
     background-size: cover;
     background-position: center;
+    outline: 2px solid var(--gold);
+    outline-offset: -6px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.channel-card::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
 }
 
 /* Reviews channel - red castle background */
