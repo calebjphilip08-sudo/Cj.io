@@ -595,6 +595,43 @@ section {
     text-align: center;
     transition: all 0.4s ease;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Reviews channel - red castle background */
+#channel-reviews {
+    background-image: url('bg-castle.png');
+}
+
+/* Gaming channel - minecraft background */
+#channel-gaming {
+    background-image: url('bg-minecraft.jpg');
+}
+
+/* Darkening overlay for readability */
+.channel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    transition: all 0.4s ease;
+}
+
+.channel-card:hover::before {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Ensure content is above overlay */
+.channel-card > * {
+    position: relative;
+    z-index: 2;
 }
 
 .channel-avatar {
@@ -604,6 +641,18 @@ section {
     margin-bottom: 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     border: 3px solid var(--accent);
+    position: relative;
+    z-index: 2;
+}
+
+.channel-card h3 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.channel-card p {
+    color: white !important;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
 }
 
 .channel-card:hover {

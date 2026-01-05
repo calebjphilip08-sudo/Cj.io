@@ -95,11 +95,26 @@
         function selectChannel(channel) {
             currentChannel = channel;
             
-            // Update UI
-            document.getElementById('channel-reviews').style.borderColor = 
-                channel === 'reviews' ? 'var(--accent)' : 'var(--dark-text)';
-            document.getElementById('channel-gaming').style.borderColor = 
-                channel === 'gaming' ? 'var(--accent)' : 'var(--dark-text)';
+            // Update UI - change border and overlay opacity
+            const reviewsCard = document.getElementById('channel-reviews');
+            const gamingCard = document.getElementById('channel-gaming');
+            
+            if (channel === 'reviews') {
+                reviewsCard.style.borderColor = 'var(--accent)';
+                reviewsCard.style.borderWidth = '4px';
+                gamingCard.style.borderColor = 'var(--border)';
+                gamingCard.style.borderWidth = '2px';
+            } else if (channel === 'gaming') {
+                gamingCard.style.borderColor = 'var(--accent)';
+                gamingCard.style.borderWidth = '4px';
+                reviewsCard.style.borderColor = 'var(--border)';
+                reviewsCard.style.borderWidth = '2px';
+            } else {
+                reviewsCard.style.borderColor = 'var(--border)';
+                reviewsCard.style.borderWidth = '2px';
+                gamingCard.style.borderColor = 'var(--border)';
+                gamingCard.style.borderWidth = '2px';
+            }
             
             // Reload current tab
             const activeTab = document.querySelector('.tab-btn.active');
