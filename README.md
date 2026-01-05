@@ -37,8 +37,8 @@
 - Channel cards at top with "Visit Channel" buttons
 - Tabs for "Videos" and "Shorts"
 - Pulls latest videos from both channels:
-  - Reviews & Writing (UC3kIeFQdpDf3Sx_cVe75HfQ)
-  - Gaming (UCh_6CVz-vy0ltQh5A-ERUzw)
+  - Reviews & Writing (https://www.youtube.com/@CJPReviewsAndWriting)
+  - Gaming (https://www.youtube.com/@CJPhilipGaming)
 - Video thumbnails clickable to open on YouTube
 - **NO AVATARS** as requested
 
@@ -53,15 +53,6 @@
 - Full-page iframes (no extra buttons)
 - Header navigation still accessible
 - Auto-updates when you post
-
-## 🚀 Deployment
-
-1. Download all 10 files
-2. Put them in ONE folder together
-3. Go to [netlify.com](https://netlify.com)
-4. Sign up (free)
-5. Drag folder → Deploy
-6. Done!
 
 ## 🔧 Important Notes
 
@@ -111,12 +102,10 @@ Make sure both blogs are set to "Public" in settings
 ## 🔗 Your Links
 
 - Letterboxd: cjphilip
-- YouTube Gaming: UCh_6CVz-vy0ltQh5A-ERUzw
-- YouTube Reviews: UC3kIeFQdpDf3Sx_cVe75HfQ
+- YouTube Gaming: https://www.youtube.com/@CJPhilipGaming
+- YouTube Reviews: https://www.youtube.com/@CJPReviewsAndWriting
 - Book Blog: cjphilipbookreviews.blogspot.com
 - Updates Blog: cjphilipyt.blogspot.com
-- Alvora Doc: 1RWoFh1v9qDabx-CVp_d3A8mp8FuauXwoXKhYxIr1crc
-- Zehndar Doc: 1T2Kkf6xb-8EWe05I-L3orkRpVBAj3ic2gwgR1rtXvJs
 
 ## 💡 Tips
 
