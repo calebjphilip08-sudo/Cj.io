@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - C.J Philip</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scroll-animations.js"></script>
+    <script src="sidebar-toggle.js"></script>
+    <script src="settings.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span>C,J Philip</span>
+            </a>
+            <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Reviews</span>
+                    <div class="dropdown-content">
+                        <a href="letterboxd.html">Letterboxd Reviews</a>
+                        <a href="book-reviews.html">Book Reviews</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Short Stories</span>
+                    <div class="dropdown-content">
+                        <a href="alvora.html">Alvora</a>
+                        <a href="zehndar.html">Zehndar</a>
+                    </div>
+                </li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="settings.html" class="active">Settings</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-content-wrapper">
+        <div class="settings-container">
+            <h1 class="settings-title">Settings</h1>
+            <p class="settings-subtitle">Customize your experience</p>
+
+            <!-- Layout Settings -->
+            <div class="settings-section">
+                <h2 class="section-title">Layout</h2>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="layout-mode">Navigation Style</label>
+                        <p class="setting-description">Choose between header or sidebar navigation</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="layout-mode" class="setting-select">
+                            <option value="header">Header (Top)</option>
+                            <option value="sidebar">Sidebar (Left)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appearance Settings -->
+            <div class="settings-section">
+                <h2 class="section-title">Appearance</h2>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="animation-speed">Animation Speed</label>
+                        <p class="setting-description">Adjust the speed of page animations</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="animation-speed" class="setting-select">
+                            <option value="slow">Slow (1.2s)</option>
+                            <option value="normal">Normal (0.8s)</option>
+                            <option value="fast">Fast (0.4s)</option>
+                            <option value="none">No Animations</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="text-size">Text Size</label>
+                        <p class="setting-description">Adjust the base text size</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="text-size" class="setting-select">
+                            <option value="small">Small</option>
+                            <option value="normal">Normal</option>
+                            <option value="large">Large</option>
+                            <option value="xlarge">Extra Large</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="reduce-motion">Reduce Motion</label>
+                        <p class="setting-description">Minimize animations for accessibility</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="reduce-motion">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Settings -->
+            <div class="settings-section">
+                <h2 class="section-title">Content</h2>
+                
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="default-yt-channel">Default YouTube Channel</label>
+                        <p class="setting-description">Which channel to show first</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="default-yt-channel" class="setting-select">
+                            <option value="cjphilip">CJ Philip (Main)</option>
+                            <option value="cjphilip-reviews">CJ Philip Reviews</option>
+                            <option value="cjphilip-gaming">CJ Philip Gaming</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="letterboxd-sort">Letterboxd Default Sort</label>
+                        <p class="setting-description">Default sorting for film reviews</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="letterboxd-sort" class="setting-select">
+                            <option value="recent">Most Recent</option>
+                            <option value="highest">Highest Rated</option>
+                            <option value="lowest">Lowest Rated</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <label for="auto-scroll">Auto-Scroll to Content</label>
+                        <p class="setting-description">Skip headers and scroll to main content</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="auto-scroll">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="settings-actions">
+                <button class="btn-reset" onclick="resetSettings()">Reset to Defaults</button>
+                <button class="btn-save" onclick="saveSettings()">Save Changes</button>
+            </div>
+
+            <div class="settings-note">
+                <p>💾 Settings are saved locally in your browser and will persist across visits.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+</body>
+</html>

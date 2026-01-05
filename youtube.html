@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="scroll-animations.js"></script>
+    <script src="sidebar-toggle.js"></script>
+    <script src="settings.js"></script>
 </head>
 <body>
     <header>
@@ -17,6 +19,11 @@
             <a href="index.html" class="logo">
                 <span>C,J Philip</span>
             </a>
+            <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="youtube.html">YouTube</a></li>
@@ -35,7 +42,11 @@
                     </div>
                 </li>
                 <li><a href="updates.html">Updates</a></li>
+                <li><a href="settings.html">Settings</a></li>
             </ul>
+            <button class="layout-toggle" onclick="toggleLayout()" title="Toggle Sidebar">
+                <span class="toggle-icon">☰</span>
+            </button>
         </nav>
     </header>
 
