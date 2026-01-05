@@ -1129,36 +1129,6 @@ body.reduce-motion * {
 }
 
 /* Sidebar Toggle Button */
-.sidebar-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 1100;
-}
-
-.sidebar-toggle span {
-    width: 100%;
-    height: 3px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-.sidebar-toggle:hover span {
-    background: var(--gold);
-}
-
-/* Show toggle button */
-body.sidebar-enabled .sidebar-toggle {
-    display: flex;
-}
-
 /* Sidebar Mode */
 body.sidebar-mode header {
     position: fixed;
@@ -1246,56 +1216,27 @@ body.sidebar-mode .full-page-embed {
     width: calc(100% - 250px);
 }
 
-/* Sidebar toggle positioned in header */
-body.sidebar-mode .sidebar-toggle {
-    position: absolute;
-    right: 1.5rem;
-    top: 2rem;
-}
-
-/* Toggle button animation when active */
-body.sidebar-mode .sidebar-toggle span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-body.sidebar-mode .sidebar-toggle span:nth-child(2) {
-    opacity: 0;
-}
-
-body.sidebar-mode .sidebar-toggle span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Always show toggle button */
-.sidebar-toggle {
-    display: flex;
-    margin-left: auto;
-}
-
-/* Layout Toggle Button */
-.layout-toggle {
-    background: none;
-    border: 2px solid var(--gold);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: all 0.8s ease-in-out;
-    margin-left: auto;
-    display: flex;
+/* Settings Gear Icon */
+.settings-icon {
+    font-size: 1.5rem;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: transform 0.5s ease;
 }
 
-.layout-toggle:hover {
-    background: var(--gold);
-    color: var(--primary);
-    transform: scale(1.05);
+.settings-icon:hover {
+    transform: rotate(90deg);
 }
 
-.toggle-icon {
-    font-size: 1.5rem;
+body.sidebar-mode .settings-icon {
+    font-size: 1.8rem;
+}
+
+/* Fix footer in sidebar mode */
+body.sidebar-mode footer {
+    width: calc(100% - 250px);
+    margin-left: 250px;
 }
 
 /* Sidebar Mode */
