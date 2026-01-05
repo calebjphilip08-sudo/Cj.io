@@ -147,6 +147,7 @@ function renderFilms(filmsToRender, animate = false) {
 function showReview(index) {
     const film = films[index];
     const overlay = document.getElementById('review-overlay');
+    const overlayContent = document.getElementById('overlay-content');
     const details = document.getElementById('review-details');
     
     details.innerHTML = `
@@ -159,13 +160,34 @@ function showReview(index) {
     
     overlay.classList.add('show');
     document.body.style.overflow = 'hidden';
+    
+    // Reset scroll position
+    overlayContent.scrollTop = 0;
+    overlayContent.classList.remove('scrolled');
+    
+    // Add scroll listener to show/hide top gradient
+    overlayContent.addEventListener('scroll', handleOverlayScroll);
+}
+
+// Handle scroll in overlay to show/hide top gradient
+function handleOverlayScroll() {
+    const overlayContent = document.getElementById('overlay-content');
+    if (overlayContent.scrollTop > 50) {
+        overlayContent.classList.add('scrolled');
+    } else {
+        overlayContent.classList.remove('scrolled');
+    }
 }
 
 // Close overlay
 function closeOverlay() {
     const overlay = document.getElementById('review-overlay');
+    const overlayContent = document.getElementById('overlay-content');
     overlay.classList.remove('show');
     document.body.style.overflow = 'auto';
+    
+    // Remove scroll listener
+    overlayContent.removeEventListener('scroll', handleOverlayScroll);
 }
 
 // Setup sorting with animation

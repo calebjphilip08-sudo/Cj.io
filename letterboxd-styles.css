@@ -42,46 +42,46 @@
     -ms-overflow-style: none;
 }
 
-/* Cream gradient at top - attached to window */
-.overlay-content::before {
-    content: '';
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
+/* Top gradient - hidden by default, shown when scrolling */
+.gradient-top {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
     height: 8rem;
     background: linear-gradient(to bottom, 
         #fff2e6 0%, 
-        #fff2e6 20%,
-        rgba(255, 242, 230, 0.9) 50%,
-        rgba(255, 242, 230, 0.6) 75%,
+        #fff2e6 15%,
+        rgba(255, 242, 230, 0.9) 40%,
+        rgba(255, 242, 230, 0.6) 70%,
         transparent 100%
     );
     pointer-events: none;
-    z-index: 5;
-    margin: -3rem -3rem 0 -3rem;
-    padding: 3rem 3rem 0 3rem;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
-/* Cream gradient at bottom - attached to window */
-.overlay-content::after {
-    content: '';
-    position: sticky;
-    bottom: 0;
-    left: 0;
-    right: 0;
+.overlay-content.scrolled .gradient-top {
+    opacity: 1;
+}
+
+/* Bottom gradient - always visible */
+.gradient-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
     height: 8rem;
     background: linear-gradient(to top, 
         #fff2e6 0%, 
-        #fff2e6 20%,
-        rgba(255, 242, 230, 0.9) 50%,
-        rgba(255, 242, 230, 0.6) 75%,
+        #fff2e6 15%,
+        rgba(255, 242, 230, 0.9) 40%,
+        rgba(255, 242, 230, 0.6) 70%,
         transparent 100%
     );
     pointer-events: none;
-    z-index: 5;
-    margin: 0 -3rem -3rem -3rem;
-    padding: 0 3rem 3rem 3rem;
+    z-index: 10;
 }
 
 .overlay-content::-webkit-scrollbar {
