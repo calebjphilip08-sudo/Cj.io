@@ -44,7 +44,7 @@
 
     <section>
         <div class="channels-grid">
-            <div class="channel-card" onclick="selectChannel('reviews')" id="channel-reviews" style="cursor: pointer;">
+            <div class="channel-card" onclick="selectChannel('reviews')" id="channel-reviews" style="cursor: pointer; border-color: var(--accent); border-width: 4px;">
                 <img src="avatar-smile.png" alt="CJ Philip" class="channel-avatar">
                 <h3>CJ Philip</h3>
                 <p style="margin-top: 0.5rem; color: #666;">Reviews & Writing</p>
@@ -87,7 +87,7 @@
         const CHANNEL_ID_REVIEWS = 'UC3kIeFQdpDf3Sx_cVe75HfQ';
         const CHANNEL_ID_GAMING = 'UCh_6CVz-vy0ltQh5A-ERUzw';
         
-        let currentChannel = 'both'; // 'both', 'reviews', or 'gaming'
+        let currentChannel = 'reviews'; // Default to reviews channel
         let allVideos = { reviews: [], gaming: [] };
         let allShorts = { reviews: [], gaming: [] };
 
