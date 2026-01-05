@@ -665,8 +665,6 @@ section {
     overflow: hidden;
     background-size: cover;
     background-position: center;
-    outline: 2px solid var(--gold);
-    outline-offset: -6px;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
 }
@@ -700,6 +698,20 @@ section {
 
 .channel-card:hover::before {
     background: rgba(0, 0, 0, 0.4);
+}
+
+/* Gold outline above overlay */
+.channel-card::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 2px solid var(--gold);
+    border-radius: 1px;
+    z-index: 3;
+    pointer-events: none;
 }
 
 /* Ensure content is above overlay */
