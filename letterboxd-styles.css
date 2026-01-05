@@ -42,48 +42,6 @@
     -ms-overflow-style: none;
 }
 
-/* Top gradient - hidden by default, shown when scrolling */
-.gradient-top {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    height: 8rem;
-    background: linear-gradient(to bottom, 
-        #fff2e6 0%, 
-        #fff2e6 15%,
-        rgba(255, 242, 230, 0.9) 40%,
-        rgba(255, 242, 230, 0.6) 70%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.overlay-content.scrolled .gradient-top {
-    opacity: 1;
-}
-
-/* Bottom gradient - always visible */
-.gradient-bottom {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    right: 10px;
-    height: 8rem;
-    background: linear-gradient(to top, 
-        #fff2e6 0%, 
-        #fff2e6 15%,
-        rgba(255, 242, 230, 0.9) 40%,
-        rgba(255, 242, 230, 0.6) 70%,
-        transparent 100%
-    );
-    pointer-events: none;
-    z-index: 10;
-}
-
 .overlay-content::-webkit-scrollbar {
     display: none;
 }
