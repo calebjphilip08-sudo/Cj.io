@@ -645,16 +645,6 @@ section {
     z-index: 2;
 }
 
-.channel-card h3 {
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-
-.channel-card p {
-    color: white !important;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-}
-
 .channel-card:hover {
     border-color: var(--accent);
     transform: translateY(-6px);
@@ -665,14 +655,17 @@ section {
     font-family: 'Playfair Display', 'Georgia', serif;
     font-size: 1.75rem;
     margin-bottom: 0.5rem;
-    color: var(--dark-text);
     font-weight: 600;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
 }
 
 .channel-card p {
-    color: var(--gray);
+    color: white !important;
     font-style: italic;
     margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
 }
 
 .channel-btn {
