@@ -41,29 +41,39 @@
     -ms-overflow-style: none;
 }
 
-/* Fade gradient at top */
+/* Cream gradient at top - under golden border */
 .overlay-content::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4rem;
-    background: linear-gradient(to bottom, #fff2e6, transparent);
+    height: 8rem;
+    background: linear-gradient(to bottom, 
+        #fff2e6 0%, 
+        rgba(255, 242, 230, 0.9) 40%,
+        rgba(255, 242, 230, 0.6) 70%,
+        transparent 100%
+    );
     pointer-events: none;
     z-index: 10;
     border-radius: 12px 12px 0 0;
 }
 
-/* Fade gradient at bottom */
+/* Cream gradient at bottom - above golden border */
 .overlay-content::after {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 4rem;
-    background: linear-gradient(to top, #fff2e6, transparent);
+    height: 8rem;
+    background: linear-gradient(to top, 
+        #fff2e6 0%, 
+        rgba(255, 242, 230, 0.9) 40%,
+        rgba(255, 242, 230, 0.6) 70%,
+        transparent 100%
+    );
     pointer-events: none;
     z-index: 10;
     border-radius: 0 0 12px 12px;
