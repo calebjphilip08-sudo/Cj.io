@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - C.J Philip</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scroll-animations.js"></script>
+    <script src="sidebar-toggle.js"></script>
+    <script src="settings.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span>C,J Philip</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Reviews</span>
+                    <div class="dropdown-content">
+                        <a href="letterboxd.html">Letterboxd Reviews</a>
+                        <a href="book-reviews.html">Book Reviews</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Short Stories</span>
+                    <div class="dropdown-content">
+                        <a href="alvora.html">Alvora</a>
+                        <a href="zehndar.html">Zehndar</a>
+                    </div>
+                </li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="feedback.html" class="active">Feedback</a></li>
+                <li><a href="settings.html" class="settings-icon" title="Settings">⚙️</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-content-wrapper">
+        <div class="feedback-container">
+            <h1 class="feedback-title">Share Your Feedback</h1>
+            <p class="feedback-subtitle">Got suggestions, questions, or just want to say hello? I'd love to hear from you!</p>
+
+            <form action="https://formsubmit.co/AlvoraQR@outlook.com" method="POST" class="feedback-form" id="feedback-form">
+                <!-- FormSubmit Configuration -->
+                <input type="hidden" name="_subject" value="New Feedback from C.J Philip Website">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                
+                <!-- Name Field (Required) -->
+                <div class="form-group">
+                    <label for="name" class="form-label">
+                        Your Name <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        class="form-input" 
+                        required
+                        placeholder="Enter your name"
+                    >
+                </div>
+
+                <!-- Email Field (Optional) -->
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        Your Email <span class="optional">(optional - for replies)</span>
+                    </label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        class="form-input" 
+                        placeholder="your.email@example.com"
+                    >
+                </div>
+
+                <!-- Message Field (Required) -->
+                <div class="form-group">
+                    <label for="message" class="form-label">
+                        Your Message <span class="required">*</span>
+                    </label>
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        class="form-textarea" 
+                        rows="8" 
+                        required
+                        placeholder="Share your thoughts, feedback, or questions..."
+                    ></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="btn-submit">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+
+            <div class="feedback-info">
+                <h3>📬 Alternative Ways to Reach Me</h3>
+                <p>You can also email me directly at: <a href="mailto:AlvoraQR@outlook.com">AlvoraQR@outlook.com</a></p>
+                <p class="privacy-note">🔒 Your information is kept private and will only be used to respond to your message.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+</body>
+</html>
