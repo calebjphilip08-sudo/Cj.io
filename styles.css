@@ -27,23 +27,6 @@ body {
     font-weight: 400;
 }
 
-/* Text Size Classes */
-body.text-small {
-    --base-text-size: 14px;
-}
-
-body.text-normal {
-    --base-text-size: 16px;
-}
-
-body.text-large {
-    --base-text-size: 18px;
-}
-
-body.text-xlarge {
-    --base-text-size: 20px;
-}
-
 /* Subtle text shadow for all text */
 h1, h2, h3, h4, h5, h6, p, a, span, li {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -1553,15 +1536,6 @@ body.sidebar-mode .layout-toggle {
 
 body.sidebar-mode .toggle-icon {
     transform: rotate(90deg);
-}
-
-/* Adjust main content in sidebar mode */
-body.sidebar-mode .page-content-wrapper {
-    margin-left: 0;
-}
-
-body.sidebar-mode .hero {
-    margin-left: 0;
 }
 
 /* Mobile - disable sidebar mode */

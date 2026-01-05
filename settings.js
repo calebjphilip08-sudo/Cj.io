@@ -4,7 +4,6 @@
     const defaultSettings = {
         layoutMode: 'header',
         animationSpeed: 'normal',
-        textSize: 'normal',
         reduceMotion: false,
         defaultYtChannel: 'cjphilip',
         letterboxdSort: 'recent',
@@ -48,23 +47,6 @@
             settings.animationSpeed === 'none' ? '0s' : '0.8s'
         );
 
-        // Apply text size
-        const textSizes = {
-            small: '14px',
-            normal: '16px',
-            large: '18px',
-            xlarge: '20px'
-        };
-        
-        // Remove any existing text size classes
-        document.body.classList.remove('text-small', 'text-normal', 'text-large', 'text-xlarge');
-        
-        // Add new text size class
-        document.body.classList.add('text-' + settings.textSize);
-        
-        // Set CSS custom property
-        document.documentElement.style.setProperty('--base-text-size', textSizes[settings.textSize] || '16px');
-
         // Apply reduce motion
         if (settings.reduceMotion) {
             document.body.classList.add('reduce-motion');
@@ -105,7 +87,6 @@
     function populateSettingsForm(settings) {
         document.getElementById('layout-mode').value = settings.layoutMode;
         document.getElementById('animation-speed').value = settings.animationSpeed;
-        document.getElementById('text-size').value = settings.textSize;
         document.getElementById('reduce-motion').checked = settings.reduceMotion;
         document.getElementById('default-yt-channel').value = settings.defaultYtChannel;
         document.getElementById('letterboxd-sort').value = settings.letterboxdSort;
@@ -117,7 +98,6 @@
         const settings = {
             layoutMode: document.getElementById('layout-mode').value,
             animationSpeed: document.getElementById('animation-speed').value,
-            textSize: document.getElementById('text-size').value,
             reduceMotion: document.getElementById('reduce-motion').checked,
             defaultYtChannel: document.getElementById('default-yt-channel').value,
             letterboxdSort: document.getElementById('letterboxd-sort').value,
