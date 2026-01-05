@@ -1485,6 +1485,7 @@ body.sidebar-mode .dropdown-toggle {
     text-align: left;
     border-radius: 6px;
     transition: all 0.8s ease-in-out;
+    color: white;
 }
 
 body.sidebar-mode .nav-links a:hover,
@@ -1521,6 +1522,7 @@ body.sidebar-mode .dropdown:hover .dropdown-content {
 body.sidebar-mode .dropdown-content a {
     padding: 0.75rem 1rem;
     margin: 0.25rem 0;
+    color: white;
 }
 
 body.sidebar-mode .layout-toggle {
