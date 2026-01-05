@@ -22,7 +22,35 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     font-weight: 400;
+    opacity: 0;
+    animation: pageLoad 0.8s ease-in-out forwards;
 }
+
+@keyframes pageLoad {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Scroll fade-in animations */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animation delays for multiple items */
+.fade-in-section:nth-child(1) { transition-delay: 0.1s; }
+.fade-in-section:nth-child(2) { transition-delay: 0.2s; }
+.fade-in-section:nth-child(3) { transition-delay: 0.3s; }
+.fade-in-section:nth-child(4) { transition-delay: 0.4s; }
+.fade-in-section:nth-child(5) { transition-delay: 0.5s; }
+.fade-in-section:nth-child(6) { transition-delay: 0.6s; }
 
 /* Header */
 header {
@@ -78,7 +106,7 @@ nav {
     color: white;
     text-decoration: none;
     letter-spacing: 0.5px;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in-out;
 }
 
 .logo:hover {
@@ -103,7 +131,7 @@ nav {
     font-size: 0.95rem;
     padding: 0.75rem 1.5rem;
     display: block;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     cursor: pointer;
     background: none;
     border: none;
@@ -142,7 +170,7 @@ nav {
     padding: 1rem 1.5rem;
     display: block;
     white-space: nowrap;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     border-bottom: 1px solid var(--border);
 }
 
@@ -243,7 +271,7 @@ nav {
     color: white;
     text-decoration: none;
     font-weight: 400;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     border: 2px solid var(--primary);
     border-radius: 2px;
     font-size: 0.95rem;
@@ -382,7 +410,7 @@ section {
     border: 1px solid var(--border);
     text-decoration: none;
     color: var(--dark-text);
-    transition: all 0.6s ease-in-out;
+    transition: all 0.9s ease-in-out;
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
@@ -457,7 +485,7 @@ section {
     cursor: pointer;
     font-weight: 400;
     font-size: 0.95rem;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     color: var(--dark-text);
     letter-spacing: 0.3px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -494,7 +522,7 @@ section {
     background: white;
     border-radius: 4px;
     overflow: hidden;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
@@ -515,7 +543,7 @@ section {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.8s ease-in-out;
 }
 
 .video-card:hover .video-thumbnail img {
@@ -545,7 +573,7 @@ section {
 /* Film/Book Cards */
 .film-card, .book-card {
     cursor: pointer;
-    transition: transform 0.6s ease-in-out;
+    transition: transform 0.9s ease-in-out;
 }
 
 .film-card:hover, .book-card:hover {
@@ -556,7 +584,7 @@ section {
     width: 100%;
     border-radius: 4px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-    transition: all 0.6s ease-in-out;
+    transition: all 0.9s ease-in-out;
 }
 
 .film-card:hover img, .book-card:hover img {
@@ -593,7 +621,7 @@ section {
     border-radius: 4px;
     border: 2px solid var(--border);
     text-align: center;
-    transition: all 0.6s ease-in-out;
+    transition: all 0.9s ease-in-out;
     box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     position: relative;
     overflow: hidden;
@@ -621,7 +649,7 @@ section {
     bottom: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
-    transition: all 0.6s ease-in-out;
+    transition: all 0.9s ease-in-out;
 }
 
 .channel-card:hover::before {
@@ -676,7 +704,7 @@ section {
     text-decoration: none;
     border-radius: 2px;
     font-weight: 500;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     letter-spacing: 0.3px;
     box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
 }
@@ -701,7 +729,7 @@ section {
     background: white;
     cursor: pointer;
     font-weight: 400;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.8s ease-in-out;
     letter-spacing: 0.3px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }

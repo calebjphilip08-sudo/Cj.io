@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="scroll-animations.js"></script>
 </head>
 <body>
     <header>
@@ -38,11 +39,11 @@
         </nav>
     </header>
 
-    <div class="page-hero">
+    <div class="page-hero fade-in-section">
         <h1>C,J Philip: YouTube Channels</h1>
     </div>
 
-    <section>
+    <section class="fade-in-section">
         <div class="channels-grid">
             <div class="channel-card" onclick="selectChannel('reviews')" id="channel-reviews" style="cursor: pointer; border-color: var(--accent); border-width: 4px;">
                 <img src="avatar-smile.png" alt="CJ Philip" class="channel-avatar">

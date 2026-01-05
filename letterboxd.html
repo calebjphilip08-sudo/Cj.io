@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="scroll-animations.js"></script>
     <link rel="stylesheet" href="letterboxd-styles.css">
 </head>
 <body>
@@ -39,7 +40,7 @@
         </nav>
     </header>
 
-    <div class="page-hero">
+    <div class="page-hero fade-in-section">
         <h1>CJ Philip: Film Reviews</h1>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
             <div class="filter-buttons">
@@ -55,7 +56,7 @@
         </div>
     </div>
 
-    <section>
+    <section class="fade-in-section">
         <div class="content-grid" id="films-grid">
             <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
                 Loading reviews...
