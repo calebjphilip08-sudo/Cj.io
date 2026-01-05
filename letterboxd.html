@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Reviews - C.J Philip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="letterboxd-styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span>C,J Philip</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Reviews</span>
+                    <div class="dropdown-content">
+                        <a href="letterboxd.html">Letterboxd Reviews</a>
+                        <a href="book-reviews.html">Book Reviews</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Short Stories</span>
+                    <div class="dropdown-content">
+                        <a href="alvora.html">Alvora</a>
+                        <a href="zehndar.html">Zehndar</a>
+                    </div>
+                </li>
+                <li><a href="updates.html">Updates</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <h1>CJ Philip: Film Reviews</h1>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-sort="recent-desc">Latest</button>
+                <button class="filter-btn" data-sort="recent-asc">Oldest</button>
+                <button class="filter-btn" data-sort="rating-desc">Highest</button>
+                <button class="filter-btn" data-sort="rating-asc">Lowest</button>
+            </div>
+            <a href="https://letterboxd.com/cjphilip/" target="_blank" 
+               style="padding: 0.5rem 1.5rem; background: linear-gradient(90deg, #FF8C00, #00c851, #0077cc); color: #000; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                View on Letterboxd
+            </a>
+        </div>
+    </div>
+
+    <section>
+        <div class="content-grid" id="films-grid">
+            <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                Loading reviews...
+            </p>
+        </div>
+    </section>
+
+    <!-- Review Overlay -->
+    <div id="review-overlay" class="overlay">
+        <div class="overlay-content">
+            <button class="close-btn" onclick="closeOverlay()">✕</button>
+            <div id="review-details"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+
+    <script src="letterboxd-script.js"></script>
+</body>
+</html>

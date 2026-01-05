@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube - C.J Philip</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span>C,J Philip</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Reviews</span>
+                    <div class="dropdown-content">
+                        <a href="letterboxd.html">Letterboxd Reviews</a>
+                        <a href="book-reviews.html">Book Reviews</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Short Stories</span>
+                    <div class="dropdown-content">
+                        <a href="alvora.html">Alvora</a>
+                        <a href="zehndar.html">Zehndar</a>
+                    </div>
+                </li>
+                <li><a href="updates.html">Updates</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-hero">
+        <h1>C,J Philip: YouTube Channels</h1>
+    </div>
+
+    <section>
+        <div class="channels-grid">
+            <div class="channel-card" onclick="selectChannel('reviews')" id="channel-reviews" style="cursor: pointer;">
+                <h3>CJ Philip</h3>
+                <p style="margin-top: 0.5rem; color: #666;">Reviews & Writing</p>
+            </div>
+            <div class="channel-card" onclick="selectChannel('gaming')" id="channel-gaming" style="cursor: pointer;">
+                <h3>CJ Philip Gaming</h3>
+                <p style="margin-top: 0.5rem; color: #666;">Gaming Content</p>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('videos')">Videos</button>
+            <button class="tab-btn" onclick="showTab('shorts')">Shorts</button>
+        </div>
+
+        <div id="videos-content">
+            <div class="video-grid" id="videos-grid">
+                <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                    Loading videos...
+                </p>
+            </div>
+        </div>
+
+        <div id="shorts-content" style="display: none;">
+            <div class="video-grid" id="shorts-grid">
+                <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                    Loading shorts...
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Channel IDs
+        const CHANNEL_ID_REVIEWS = 'UC3kIeFQdpDf3Sx_cVe75HfQ';
+        const CHANNEL_ID_GAMING = 'UCh_6CVz-vy0ltQh5A-ERUzw';
+        
+        let currentChannel = 'both'; // 'both', 'reviews', or 'gaming'
+        let allVideos = { reviews: [], gaming: [] };
+        let allShorts = { reviews: [], gaming: [] };
+
+        // Channel selection
+        function selectChannel(channel) {
+            currentChannel = channel;
+            
+            // Update UI
+            document.getElementById('channel-reviews').style.borderColor = 
+                channel === 'reviews' ? 'var(--accent)' : 'var(--dark-text)';
+            document.getElementById('channel-gaming').style.borderColor = 
+                channel === 'gaming' ? 'var(--accent)' : 'var(--dark-text)';
+            
+            // Reload current tab
+            const activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab.textContent === 'Videos') {
+                displayVideos();
+            } else {
+                displayShorts();
+            }
+        }
+
+        // Tab switching
+        function showTab(tab) {
+            const videosContent = document.getElementById('videos-content');
+            const shortsContent = document.getElementById('shorts-content');
+            const tabs = document.querySelectorAll('.tab-btn');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'videos') {
+                videosContent.style.display = 'block';
+                shortsContent.style.display = 'none';
+                tabs[0].classList.add('active');
+                displayVideos();
+            } else {
+                videosContent.style.display = 'none';
+                shortsContent.style.display = 'block';
+                tabs[1].classList.add('active');
+                displayShorts();
+            }
+        }
+
+        // Fetch videos from YouTube RSS feed
+        async function fetchYouTubeVideos(channelId, isShorts = false) {
+            try {
+                const rssUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`);
+                const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`);
+                const data = await response.json();
+                
+                if (data.items) {
+                    return data.items.filter(item => {
+                        if (isShorts) {
+                            return item.title.toLowerCase().includes('short') || item.link.includes('/shorts/');
+                        } else {
+                            return !item.link.includes('/shorts/');
+                        }
+                    });
+                }
+                return [];
+            } catch (error) {
+                console.error('Error fetching videos:', error);
+                return [];
+            }
+        }
+
+        // Render video cards
+        function renderVideos(videos, gridId) {
+            const grid = document.getElementById(gridId);
+            
+            if (videos.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">No videos found. Try selecting a channel above!</p>';
+                return;
+            }
+            
+            grid.innerHTML = videos.map(video => {
+                const videoId = video.link.split('v=')[1] || video.link.split('/shorts/')[1];
+                const thumbnail = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                
+                return `
+                    <div class="video-card" onclick="window.open('${video.link}', '_blank')">
+                        <div class="video-thumbnail">
+                            <img src="${thumbnail}" alt="${video.title}" loading="lazy">
+                        </div>
+                        <div class="video-info">
+                            <div class="video-title">${video.title}</div>
+                            <div class="video-meta">${new Date(video.pubDate).toLocaleDateString()}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Display videos based on selected channel
+        function displayVideos() {
+            let videos = [];
+            
+            if (currentChannel === 'reviews') {
+                videos = allVideos.reviews;
+            } else if (currentChannel === 'gaming') {
+                videos = allVideos.gaming;
+            } else {
+                videos = [...allVideos.reviews, ...allVideos.gaming]
+                    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            }
+            
+            videos = videos.slice(0, 12);
+            renderVideos(videos, 'videos-grid');
+        }
+
+        // Display shorts based on selected channel
+        function displayShorts() {
+            let shorts = [];
+            
+            if (currentChannel === 'reviews') {
+                shorts = allShorts.reviews;
+            } else if (currentChannel === 'gaming') {
+                shorts = allShorts.gaming;
+            } else {
+                shorts = [...allShorts.reviews, ...allShorts.gaming]
+                    .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+            }
+            
+            shorts = shorts.slice(0, 12);
+            renderVideos(shorts, 'shorts-grid');
+        }
+
+        // Load all videos
+        async function loadAllContent() {
+            allVideos.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, false);
+            allVideos.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, false);
+            allShorts.reviews = await fetchYouTubeVideos(CHANNEL_ID_REVIEWS, true);
+            allShorts.gaming = await fetchYouTubeVideos(CHANNEL_ID_GAMING, true);
+            
+            displayVideos();
+        }
+
+        // Initialize
+        loadAllContent();
+    </script>
+</body>
+</html>
