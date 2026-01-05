@@ -22,6 +22,10 @@ body {
     line-height: 1.7;
     overflow-x: hidden;
     font-weight: 400;
+}
+
+/* Page load fade-in (not header) */
+.page-content-wrapper {
     opacity: 0;
     animation: pageLoad 0.8s ease-in-out forwards;
 }
@@ -30,6 +34,12 @@ body {
     to {
         opacity: 1;
     }
+}
+
+/* Header stays visible */
+header {
+    opacity: 1 !important;
+    animation: none !important;
 }
 
 /* Scroll fade-in animations */
@@ -62,7 +72,6 @@ header {
     z-index: 1000;
     box-shadow: 0 2px 12px rgba(0,0,0,0.15);
     border-bottom: 4px solid var(--gold);
-    position: relative;
 }
 
 header::after {
