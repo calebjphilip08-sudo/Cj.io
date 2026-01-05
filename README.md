@@ -101,11 +101,11 @@ Make sure both blogs are set to "Public" in settings
 
 ## 🔗 Your Links
 
-- Letterboxd: cjphilip
+- Letterboxd: https://letterboxd.com/cjphilip/films/size/large/
 - YouTube Gaming: https://www.youtube.com/@CJPhilipGaming
 - YouTube Reviews: https://www.youtube.com/@CJPReviewsAndWriting
-- Book Blog: cjphilipbookreviews.blogspot.com
-- Updates Blog: cjphilipyt.blogspot.com
+- Book Blog: https://cjphilipbookreviews.blogspot.com
+- Updates Blog: https://cjphilipyt.blogspot.com
 
 ## 💡 Tips
 
