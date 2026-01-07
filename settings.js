@@ -4,6 +4,7 @@
     const defaultSettings = {
         layoutMode: 'header',
         animationSpeed: 'normal',
+        darkMode: false,
         reduceMotion: false,
         defaultYtChannel: 'cjphilip',
         letterboxdSort: 'recent',
@@ -55,6 +56,13 @@
             document.body.classList.remove('reduce-motion');
         }
 
+        // Apply dark mode
+        if (settings.darkMode) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+
         // Store YouTube default channel preference
         localStorage.setItem('defaultYtChannel', settings.defaultYtChannel);
 
@@ -87,6 +95,7 @@
     function populateSettingsForm(settings) {
         document.getElementById('layout-mode').value = settings.layoutMode;
         document.getElementById('animation-speed').value = settings.animationSpeed;
+        document.getElementById('dark-mode').checked = settings.darkMode;
         document.getElementById('reduce-motion').checked = settings.reduceMotion;
         document.getElementById('default-yt-channel').value = settings.defaultYtChannel;
         document.getElementById('letterboxd-sort').value = settings.letterboxdSort;
@@ -98,6 +107,7 @@
         const settings = {
             layoutMode: document.getElementById('layout-mode').value,
             animationSpeed: document.getElementById('animation-speed').value,
+            darkMode: document.getElementById('dark-mode').checked,
             reduceMotion: document.getElementById('reduce-motion').checked,
             defaultYtChannel: document.getElementById('default-yt-channel').value,
             letterboxdSort: document.getElementById('letterboxd-sort').value,
