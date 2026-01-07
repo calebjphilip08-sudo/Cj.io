@@ -1604,7 +1604,7 @@ body.dark-mode {
 
 /* Dark mode - white elements become grey */
 body.dark-mode .hero-content,
-body.dark-mode .featured-card,
+body.dark-mode .feature-card,
 body.dark-mode .channel-card,
 body.dark-mode .video-card,
 body.dark-mode .settings-section,
@@ -1617,7 +1617,7 @@ body.dark-mode .about-section {
 }
 
 /* Dark mode - borders */
-body.dark-mode .featured-card,
+body.dark-mode .feature-card,
 body.dark-mode .channel-card,
 body.dark-mode .settings-section,
 body.dark-mode .feedback-form,
@@ -1665,6 +1665,15 @@ body.dark-mode .setting-description {
     color: #bbbbbb;
 }
 
+/* Dark mode - feature card text */
+body.dark-mode .feature-card h3 {
+    color: #ffffff;
+}
+
+body.dark-mode .feature-card p {
+    color: #bbbbbb;
+}
+
 /* Dark mode - feedback info box */
 body.dark-mode .feedback-info {
     background: #1a1a1a;
@@ -1688,7 +1697,7 @@ body.dark-mode .dropdown-content {
 }
 
 /* Dark mode - hover states */
-body.dark-mode .featured-card:hover,
+body.dark-mode .feature-card:hover,
 body.dark-mode .channel-card:hover,
 body.dark-mode .video-card:hover {
     transform: translateY(-8px);
