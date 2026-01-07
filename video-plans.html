@@ -9,8 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="auth-styles.css">
-    <link rel="stylesheet" href="blog-overlay-styles.css">
     <script src="scroll-animations.js"></script>
     <script src="sidebar-toggle.js"></script>
     <script src="settings.js"></script>
@@ -42,61 +40,16 @@
                 <li><a href="updates.html">Updates</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
                 <li><a href="settings.html" class="settings-icon" title="Settings">⚙️</a></li>
-                <button id="login-btn" onclick="openAuthModal()" style="display: none;">Sign In</button>
-                <button id="user-menu-btn" onclick="toggleUserMenu()" style="display: none;"></button>
             </ul>
         </nav>
     </header>
 
     <div class="page-content-wrapper">
-        <div class="page-hero fade-in-section">
-            <h1>Video Plans</h1>
-            <div class="hero-controls">
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-sort="recent">Latest</button>
-                    <button class="filter-btn" data-sort="oldest">Oldest</button>
-                </div>
-            </div>
-        </div>
 
-        <section class="fade-in-section">
-            <div class="content-grid videos-grid" id="posts-grid">
-                <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
-                    No video plans yet.
-                </p>
-            </div>
-        </section>
+    <iframe src="https://cjphilipvidplan.blogspot.com/" 
+            class="full-page-embed"
+            title="CJ Philip Video Plans"></iframe>
 
-        <!-- Post Overlay -->
-        <div id="post-overlay" class="overlay">
-            <div class="overlay-content" id="overlay-content">
-                <button class="close-btn" onclick="closeOverlay()">✕</button>
-                <div id="post-details"></div>
-            </div>
-        </div>
     </div>
-
-    <footer>
-        <p>© 2026 C.J Philip. All rights reserved.</p>
-    </footer>
-
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
-    <script src="auth-handler.js"></script>
-
-    <!-- Load Auth Modal -->
-    <script>
-        fetch('auth-modal.html')
-            .then(response => response.text())
-            .then(html => {
-                document.body.insertAdjacentHTML('beforeend', html);
-            });
-    </script>
-    <script>
-        const CATEGORY = 'Video Plans';
-    </script>
-    <script src="blog-overlay-display.js"></script>
 </body>
 </html>
