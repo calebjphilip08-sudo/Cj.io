@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - C.J Philip</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth-styles.css">
+    <script src="scroll-animations.js"></script>
+    <script src="sidebar-toggle.js"></script>
+    <script src="settings.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <span>C,J Philip</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="youtube.html">YouTube</a></li>
+                <li><a href="video-plans.html" class="video-plans-icon" title="Video Plans">🎬</a></li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Reviews</span>
+                    <div class="dropdown-content">
+                        <a href="letterboxd.html">Letterboxd Reviews</a>
+                        <a href="book-reviews.html">Book Reviews</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <span class="dropdown-toggle">Short Stories</span>
+                    <div class="dropdown-content">
+                        <a href="alvora.html">Alvora</a>
+                        <a href="zehndar.html">Zehndar</a>
+                    </div>
+                </li>
+                <li><a href="updates.html">Updates</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+                <li><a href="settings.html" class="settings-icon" title="Settings">⚙️</a></li>
+                <button id="login-btn" onclick="openAuthModal()" style="display: none;">Sign In</button>
+                <button id="user-menu-btn" onclick="toggleUserMenu()" style="display: none;"></button>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="page-content-wrapper">
+        <div id="profile-loading" class="settings-container" style="text-align: center; padding: 4rem;">
+            <p>Loading profile...</p>
+        </div>
+
+        <div id="profile-content" class="settings-container" style="display: none;">
+            <h1 class="settings-title">My Profile</h1>
+            <p class="settings-subtitle">Manage your account and preferences</p>
+
+            <!-- Profile Info -->
+            <div class="settings-section">
+                <h2 class="section-title">Profile Information</h2>
+                
+                <div class="profile-info">
+                    <div class="editor-field">
+                        <label>Email</label>
+                        <input type="text" id="profile-email" disabled>
+                    </div>
+                    
+                    <div class="editor-field">
+                        <label for="profile-name">Display Name</label>
+                        <input type="text" id="profile-name" placeholder="Your name">
+                    </div>
+                    
+                    <div class="editor-field">
+                        <label for="profile-bio">Bio</label>
+                        <textarea id="profile-bio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                    </div>
+                    
+                    <div class="editor-field">
+                        <label for="profile-interests">Interests (comma-separated)</label>
+                        <input type="text" id="profile-interests" placeholder="e.g., Fantasy, Sci-Fi, Gaming">
+                    </div>
+                    
+                    <button onclick="saveProfile()" class="btn-primary">Save Changes</button>
+                </div>
+            </div>
+
+            <!-- My Comments -->
+            <div class="settings-section">
+                <h2 class="section-title">My Comments</h2>
+                <div id="user-comments" class="comments-list">
+                    <p style="text-align: center; color: #666;">No comments yet</p>
+                </div>
+            </div>
+
+            <!-- Admin Section -->
+            <div class="settings-section admin-only" style="display: none;">
+                <h2 class="section-title">Admin Controls</h2>
+                <div class="admin-controls">
+                    <a href="blog-manager.html" class="btn-primary">✏️ Manage Posts</a>
+                    <a href="messages.html" class="btn-secondary">💬 View All Messages</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="not-logged-in" class="settings-container" style="display: none; text-align: center; padding: 4rem;">
+            <h2>Please Sign In</h2>
+            <p>You need to be signed in to view your profile.</p>
+            <button onclick="openAuthModal()" class="btn-primary" style="margin-top: 2rem;">Sign In</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+
+    <!-- Include Auth Modal -->
+    <script>
+        fetch('auth-modal.html')
+            .then(response => response.text())
+            .then(html => {
+                document.body.insertAdjacentHTML('beforeend', html);
+            });
+    </script>
+
+    <script>
+        // Load user profile
+        async function loadProfile() {
+            const user = auth.currentUser;
+            
+            if (!user) {
+                document.getElementById('profile-loading').style.display = 'none';
+                document.getElementById('not-logged-in').style.display = 'block';
+                return;
+            }
+            
+            try {
+                const userData = await getCurrentUserData();
+                
+                document.getElementById('profile-email').value = user.email;
+                document.getElementById('profile-name').value = userData?.displayName || '';
+                document.getElementById('profile-bio').value = userData?.bio || '';
+                document.getElementById('profile-interests').value = userData?.interests?.join(', ') || '';
+                
+                // Load user comments
+                loadUserComments();
+                
+                document.getElementById('profile-loading').style.display = 'none';
+                document.getElementById('profile-content').style.display = 'block';
+            } catch (error) {
+                console.error('Error loading profile:', error);
+            }
+        }
+        
+        // Save profile
+        async function saveProfile() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            const name = document.getElementById('profile-name').value.trim();
+            const bio = document.getElementById('profile-bio').value.trim();
+            const interestsInput = document.getElementById('profile-interests').value;
+            const interests = interestsInput.split(',').map(i => i.trim()).filter(i => i);
+            
+            try {
+                await user.updateProfile({ displayName: name });
+                
+                await db.collection('users').doc(user.uid).update({
+                    displayName: name,
+                    bio: bio,
+                    interests: interests,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                
+                alert('✅ Profile updated successfully!');
+            } catch (error) {
+                console.error('Error saving profile:', error);
+                alert('Error saving profile. Please try again.');
+            }
+        }
+        
+        // Load user comments
+        async function loadUserComments() {
+            const user = auth.currentUser;
+            if (!user) return;
+            
+            try {
+                const snapshot = await db.collection('comments')
+                    .where('userId', '==', user.uid)
+                    .orderBy('createdAt', 'desc')
+                    .limit(10)
+                    .get();
+                
+                const container = document.getElementById('user-comments');
+                
+                if (snapshot.empty) {
+                    container.innerHTML = '<p style="text-align: center; color: #666;">No comments yet</p>';
+                    return;
+                }
+                
+                container.innerHTML = snapshot.docs.map(doc => {
+                    const comment = doc.data();
+                    const date = comment.createdAt?.toDate().toLocaleDateString();
+                    return `
+                        <div class="comment-item">
+                            <div class="comment-header">
+                                <strong>${comment.postTitle || 'Unknown Post'}</strong>
+                                <span class="comment-date">${date}</span>
+                            </div>
+                            <p class="comment-text">${comment.text}</p>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Error loading comments:', error);
+            }
+        }
+        
+        // Wait for auth to be ready
+        auth.onAuthStateChanged(() => {
+            loadProfile();
+        });
+    </script>
+</body>
+</html>

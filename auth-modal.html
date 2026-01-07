@@ -1,0 +1,57 @@
+<!-- Authentication Modal -->
+<div id="auth-modal" class="auth-modal">
+    <div class="auth-modal-content">
+        <button class="auth-close-btn" onclick="closeAuthModal()">✕</button>
+        
+        <!-- Login Form -->
+        <div id="login-form" class="auth-form">
+            <h2>Welcome Back</h2>
+            <p class="auth-subtitle">Sign in to your account</p>
+            
+            <input type="email" id="login-email" placeholder="Email" autocomplete="email">
+            <input type="password" id="login-password" placeholder="Password" autocomplete="current-password">
+            
+            <button onclick="handleLogin()" class="auth-btn-primary">Sign In</button>
+            
+            <p class="auth-switch">
+                Don't have an account? 
+                <a href="#" onclick="switchToSignup(); return false;">Sign Up</a>
+            </p>
+            
+            <p id="login-error" class="auth-error"></p>
+        </div>
+        
+        <!-- Signup Form -->
+        <div id="signup-form" class="auth-form" style="display: none;">
+            <h2>Join Us</h2>
+            <p class="auth-subtitle">Create your account</p>
+            
+            <input type="text" id="signup-name" placeholder="Display Name">
+            <input type="email" id="signup-email" placeholder="Email" autocomplete="email">
+            <input type="password" id="signup-password" placeholder="Password (min 6 characters)" autocomplete="new-password">
+            
+            <button onclick="handleSignup()" class="auth-btn-primary">Create Account</button>
+            
+            <p class="auth-switch">
+                Already have an account? 
+                <a href="#" onclick="switchToLogin(); return false;">Sign In</a>
+            </p>
+            
+            <p id="signup-error" class="auth-error"></p>
+        </div>
+    </div>
+</div>
+
+<!-- User Menu Dropdown -->
+<div id="user-menu-dropdown" class="user-dropdown">
+    <a href="profile.html">👤 My Profile</a>
+    <a href="messages.html">💬 Messages</a>
+    <a href="#" onclick="handleLogout(); return false;">🚪 Logout</a>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="auth-handler.js"></script>

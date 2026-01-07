@@ -1908,6 +1908,44 @@ body.sidebar-mode .toggle-icon {
     color: #666;
 }
 
+/* Publish Instructions */
+.publish-instructions {
+    background: #fffbea;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.publish-instructions p {
+    margin: 0 0 1rem 0;
+    color: #333;
+}
+
+.publish-instructions strong {
+    color: var(--accent);
+}
+
+.publish-instructions ol {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+    color: #444;
+}
+
+.publish-instructions li {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+}
+
+.publish-instructions code {
+    background: #fff;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: var(--accent);
+    font-weight: 600;
+}
+
 /* Login Screen */
 .login-screen {
     display: flex;
