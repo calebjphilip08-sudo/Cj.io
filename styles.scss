@@ -1,0 +1,124 @@
+/* Base CSS + theme variables */
+
+/* Visually-hidden utility */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Default (light) variables */
+:root {
+  --bg: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --header-bg: rgba(255,255,255,0.6);
+  --card-bg: #f8fafc;
+  --theme-meta: #ffffff; /* used to set meta theme-color */
+  --transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* Dark theme override */
+:root[data-theme='dark'],
+[data-theme='dark'] {
+  --bg: #0b1220;
+  --text: #e6eef8;
+  --muted: #9aa6b2;
+  --accent: #60a5fa;
+  --header-bg: rgba(8,12,20,0.6);
+  --card-bg: #071025;
+  --theme-meta: #071025;
+}
+
+/* Respect system preference by default for new visitors */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0b1220;
+    --text: #e6eef8;
+    --muted: #9aa6b2;
+    --accent: #60a5fa;
+    --header-bg: rgba(8,12,20,0.6);
+    --card-bg: #071025;
+    --theme-meta: #071025;
+  }
+}
+
+/* Apply variables */
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+}
+
+/* Header and toggle styling */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--header-bg);
+  backdrop-filter: blur(6px);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease;
+}
+.theme-toggle:focus {
+  outline: 3px solid rgba(96,165,250,0.25);
+  outline-offset: 2px;
+}
+
+/* Show only the appropriate icon */
+.icon-moon { display: none; }
+:root[data-theme='dark'] .icon-moon { display: inline-block; }
+:root[data-theme='dark'] .icon-sun { display: none; }
+
+/* For preference via media query when no data-theme set */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .icon-moon { display: inline-block; }
+  :root:not([data-theme]) .icon-sun { display: none; }
+}
+
+/* Example content */
+main { padding: 1rem; }
+.card {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+/* Images that need special handling in dark mode */
+.theme-sensitive {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+/* Option: invert images for dark theme (use with caution) */
+[data-theme='dark'] .theme-sensitive.invert-in-dark {
+  filter: brightness(1.05) contrast(1.05);
+  /* or: filter: invert(1) hue-rotate(180deg); */
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  :root { --transition: none; }
+}
