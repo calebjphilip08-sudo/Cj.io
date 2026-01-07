@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Manager - C.J Philip</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scroll-animations.js"></script>
+    <script src="sidebar-toggle.js"></script>
+    <script src="settings.js"></script>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <h1>Blog Manager</h1>
+            <p>Please login to continue</p>
+            <div class="login-form">
+                <input type="text" id="username" placeholder="Username" autocomplete="username">
+                <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+                <button onclick="attemptLogin()" class="btn-primary">Login</button>
+                <p id="login-error" class="login-error"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden until login) -->
+    <div id="main-content" style="display: none;">
+        <header>
+            <nav>
+                <a href="index.html" class="logo">
+                    <span>C,J Philip</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="youtube.html">YouTube</a></li>
+                    <li><a href="video-plans.html" class="video-plans-icon" title="Video Plans">🎬</a></li>
+                    <li class="dropdown">
+                        <span class="dropdown-toggle">Reviews</span>
+                        <div class="dropdown-content">
+                            <a href="letterboxd.html">Letterboxd Reviews</a>
+                            <a href="book-reviews.html">Book Reviews</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <span class="dropdown-toggle">Short Stories</span>
+                        <div class="dropdown-content">
+                            <a href="alvora.html">Alvora</a>
+                            <a href="zehndar.html">Zehndar</a>
+                        </div>
+                    </li>
+                    <li><a href="updates.html">Updates</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="settings.html" class="settings-icon" title="Settings">⚙️</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="page-content-wrapper">
+            <div class="settings-container">
+                <div class="blog-manager-header">
+                    <div>
+                        <h1 class="settings-title">Blog Manager</h1>
+                        <p class="settings-subtitle">Create and manage posts for all blog sections</p>
+                    </div>
+                    <button onclick="logout()" class="btn-secondary">Logout</button>
+                </div>
+
+                <!-- Post Editor -->
+                <div class="settings-section">
+                    <h2 class="section-title">Create/Edit Post</h2>
+                    
+                    <div class="blog-editor">
+                        <input type="hidden" id="post-id">
+                        
+                        <div class="editor-field">
+                            <label for="post-category">Category (Page)</label>
+                            <select id="post-category" class="setting-select" onchange="updateEditorFields()">
+                                <option value="Updates">Updates</option>
+                                <option value="Book Reviews">Book Reviews</option>
+                                <option value="Video Plans">Video Plans</option>
+                            </select>
+                        </div>
+
+                        <div class="editor-field">
+                            <label for="post-title">Title</label>
+                            <input type="text" id="post-title" placeholder="Enter post title...">
+                        </div>
+
+                        <!-- Updates: Text Preview -->
+                        <div class="editor-field" id="field-preview" style="display: block;">
+                            <label for="post-preview">Preview Text</label>
+                            <textarea id="post-preview" rows="3" placeholder="Short preview text (shown in card)..."></textarea>
+                        </div>
+
+                        <!-- Book Reviews: Portrait Thumbnail -->
+                        <div class="editor-field" id="field-book-thumbnail" style="display: none;">
+                            <label for="book-thumbnail">Book Cover (Portrait)</label>
+                            <input type="file" id="book-thumbnail" accept="image/*" onchange="handleImageUpload(event, 'book')">
+                            <div id="book-thumbnail-preview" class="image-preview"></div>
+                        </div>
+
+                        <!-- Book Reviews: Rating -->
+                        <div class="editor-field" id="field-book-rating" style="display: none;">
+                            <label for="book-rating">Rating</label>
+                            <select id="book-rating" class="setting-select">
+                                <option value="">No Rating</option>
+                                <option value="1">⭐ (1 Star)</option>
+                                <option value="2">⭐⭐ (2 Stars)</option>
+                                <option value="3">⭐⭐⭐ (3 Stars)</option>
+                                <option value="4">⭐⭐⭐⭐ (4 Stars)</option>
+                                <option value="5">⭐⭐⭐⭐⭐ (5 Stars)</option>
+                            </select>
+                        </div>
+
+                        <!-- Video Plans: Landscape Thumbnail -->
+                        <div class="editor-field" id="field-video-thumbnail" style="display: none;">
+                            <label for="video-thumbnail">Video Thumbnail (Landscape)</label>
+                            <input type="file" id="video-thumbnail" accept="image/*" onchange="handleImageUpload(event, 'video')">
+                            <div id="video-thumbnail-preview" class="image-preview"></div>
+                        </div>
+
+                        <div class="editor-field">
+                            <label for="post-content">Content</label>
+                            <textarea id="post-content" rows="15" placeholder="Write your post content here..."></textarea>
+                        </div>
+
+                        <div class="editor-field">
+                            <label for="post-status">Status</label>
+                            <select id="post-status" class="setting-select">
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+
+                        <div class="editor-actions">
+                            <button onclick="savePost()" class="btn-primary">Save Post</button>
+                            <button onclick="clearEditor()" class="btn-secondary">Clear Form</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Posts List -->
+                <div class="settings-section">
+                    <h2 class="section-title">Your Posts</h2>
+                    
+                    <!-- Category Filter -->
+                    <div class="post-filter-tabs">
+                        <button onclick="filterPostsList('all')" class="filter-tab active" id="tab-all">All Posts</button>
+                        <button onclick="filterPostsList('Updates')" class="filter-tab" id="tab-Updates">Updates</button>
+                        <button onclick="filterPostsList('Book Reviews')" class="filter-tab" id="tab-Book Reviews">Book Reviews</button>
+                        <button onclick="filterPostsList('Video Plans')" class="filter-tab" id="tab-Video Plans">Video Plans</button>
+                    </div>
+
+                    <div id="posts-list" class="posts-list">
+                        <p style="text-align: center; color: #666;">No posts yet. Create your first post above!</p>
+                    </div>
+                </div>
+
+                <!-- Import/Export -->
+                <div class="settings-section">
+                    <h2 class="section-title">Backup & Restore</h2>
+                    <div class="backup-actions">
+                        <button onclick="exportPosts()" class="btn-secondary">Export Posts (JSON)</button>
+                        <button onclick="document.getElementById('import-file').click()" class="btn-secondary">Import Posts</button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importPosts(event)">
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <p>💾 Posts are saved locally in your browser and will persist across visits.</p>
+                    <p>📤 Use Export to backup your posts as a JSON file.</p>
+                    <p>📝 Each category has custom fields:</p>
+                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
+                        <li><strong>Updates:</strong> Text preview</li>
+                        <li><strong>Book Reviews:</strong> Portrait book cover</li>
+                        <li><strong>Video Plans:</strong> Landscape thumbnail</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 C.J Philip. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="blog-manager.js"></script>
+</body>
+</html>

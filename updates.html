@@ -9,11 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="blog-overlay-styles.css">
     <script src="scroll-animations.js"></script>
     <script src="sidebar-toggle.js"></script>
     <script src="settings.js"></script>
 </head>
-<body style="margin: 0; padding: 0;">
+<body>
     <header>
         <nav>
             <a href="index.html" class="logo">
@@ -37,7 +38,7 @@
                         <a href="zehndar.html">Zehndar</a>
                     </div>
                 </li>
-                <li><a href="updates.html">Updates</a></li>
+                <li><a href="updates.html" class="active">Updates</a></li>
                 <li><a href="feedback.html">Feedback</a></li>
                 <li><a href="settings.html" class="settings-icon" title="Settings">⚙️</a></li>
             </ul>
@@ -45,11 +46,41 @@
     </header>
 
     <div class="page-content-wrapper">
+        <div class="page-hero fade-in-section">
+            <h1>Updates</h1>
+            <div class="hero-controls">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-sort="recent">Latest</button>
+                    <button class="filter-btn" data-sort="oldest">Oldest</button>
+                </div>
+                <a href="blog-manager.html" class="manage-btn">✏️ Manage Posts</a>
+            </div>
+        </div>
 
-    <iframe src="https://cjphilipyt.blogspot.com/" 
-            class="full-page-embed"
-            title="CJ Philip Updates"></iframe>
+        <section class="fade-in-section">
+            <div class="content-grid" id="posts-grid">
+                <p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">
+                    No updates yet.
+                </p>
+            </div>
+        </section>
 
+        <!-- Post Overlay -->
+        <div id="post-overlay" class="overlay">
+            <div class="overlay-content" id="overlay-content">
+                <button class="close-btn" onclick="closeOverlay()">✕</button>
+                <div id="post-details"></div>
+            </div>
+        </div>
     </div>
+
+    <footer>
+        <p>© 2026 C.J Philip. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const CATEGORY = 'Updates';
+    </script>
+    <script src="blog-overlay-display.js"></script>
 </body>
 </html>

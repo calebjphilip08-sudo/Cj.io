@@ -1,0 +1,423 @@
+/* Blog Overlay Styles - Based on Letterboxd System */
+
+.page-hero {
+    padding: 2rem;
+    background: white;
+    border-bottom: 3px solid var(--accent);
+    margin-bottom: 2rem;
+}
+
+.page-hero h1 {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+}
+
+.hero-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.25rem;
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--dark-text);
+}
+
+.filter-btn:hover {
+    border-color: var(--accent);
+    background: var(--light);
+}
+
+.filter-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.manage-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--gold);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.manage-btn:hover {
+    background: var(--primary);
+    transform: translateY(-2px);
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Book Reviews - Portrait Grid */
+.books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+/* Video Plans - Landscape Grid */
+.videos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+/* Post Cards */
+.post-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.post-card:hover {
+    transform: translateY(-8px);
+}
+
+/* Updates Card - Text Preview */
+.update-card {
+    background: white;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 200px;
+}
+
+.update-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+.update-card-title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 600;
+}
+
+.update-card-preview {
+    background: var(--light);
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 3px solid var(--gold);
+    color: #666;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex: 1;
+}
+
+.update-card-date {
+    color: var(--gray);
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+/* Book Review Card - Portrait */
+.book-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.book-card-cover {
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 3px solid var(--accent);
+}
+
+.book-card-cover:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    border-color: var(--gold);
+}
+
+.book-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-card-info {
+    text-align: center;
+}
+
+.book-card-title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 1.1rem;
+    color: var(--primary);
+    margin: 0 0 0.25rem 0;
+    font-weight: 600;
+}
+
+.book-card-rating {
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Video Plan Card - Landscape */
+.video-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.video-card-thumbnail {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+    border: 3px solid var(--accent);
+}
+
+.video-card-thumbnail:hover {
+    border-color: var(--gold);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.video-card-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-card-title {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin: 0;
+    font-weight: 600;
+}
+
+.video-card-date {
+    color: var(--gray);
+    font-size: 0.85rem;
+}
+
+/* Overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 10000;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.overlay.active {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.overlay-content {
+    background: white;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    position: relative;
+    margin: 80px auto;
+    border: 4px solid var(--accent);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: var(--primary);
+    transform: rotate(90deg);
+}
+
+/* Overlay Content Layouts */
+.overlay-post {
+    padding: 3rem;
+}
+
+/* Updates Overlay */
+.overlay-update .overlay-header {
+    margin-bottom: 2rem;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 1.5rem;
+}
+
+.overlay-update h2 {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+}
+
+.overlay-update .post-meta {
+    color: var(--gray);
+    font-size: 0.95rem;
+}
+
+.overlay-update .post-preview {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+    margin-bottom: 2rem;
+    font-style: italic;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+/* Book Review Overlay */
+.overlay-book {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 3rem;
+    padding: 3rem;
+}
+
+.overlay-book-cover {
+    position: sticky;
+    top: 0;
+}
+
+.overlay-book-cover img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    border: 3px solid var(--accent);
+}
+
+.overlay-book-info h2 {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+}
+
+.overlay-book-rating {
+    font-size: 2rem;
+    color: var(--gold);
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.overlay-book-meta {
+    color: var(--gray);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* Video Plan Overlay */
+.overlay-video .video-thumbnail-large {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    border: 4px solid var(--accent);
+}
+
+.overlay-video .video-thumbnail-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-video h2 {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin: 0 0 1rem 0;
+}
+
+.overlay-video .post-meta {
+    color: var(--gray);
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+/* Post Content */
+.post-content {
+    line-height: 1.8;
+    color: #333;
+}
+
+.post-content p {
+    margin-bottom: 1.25rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .overlay-content {
+        margin: 20px auto;
+    }
+    
+    .overlay-book {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .overlay-book-cover {
+        position: static;
+        max-width: 200px;
+        margin: 0 auto;
+    }
+    
+    .overlay-post {
+        padding: 2rem;
+    }
+    
+    .content-grid,
+    .books-grid,
+    .videos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
