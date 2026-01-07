@@ -161,25 +161,10 @@
                     </div>
                 </div>
 
-                <!-- Import/Export -->
-                <div class="settings-section">
-                    <h2 class="section-title">Backup & Restore</h2>
-                    <div class="backup-actions">
-                        <button onclick="exportPosts()" class="btn-secondary">Export Posts (JSON)</button>
-                        <button onclick="document.getElementById('import-file').click()" class="btn-secondary">Import Posts</button>
-                        <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importPosts(event)">
-                    </div>
-                </div>
-
                 <div class="info-box">
-                    <p>💾 Posts are saved locally in your browser and will persist across visits.</p>
-                    <p>📤 Use Export to backup your posts as a JSON file.</p>
-                    <p>📝 Each category has custom fields:</p>
-                    <ul style="margin: 0.5rem 0; padding-left: 1.5rem;">
-                        <li><strong>Updates:</strong> Text preview</li>
-                        <li><strong>Book Reviews:</strong> Portrait book cover</li>
-                        <li><strong>Video Plans:</strong> Landscape thumbnail</li>
-                    </ul>
+                    <p>✅ Posts automatically save to Firebase and go live instantly!</p>
+                    <p>🌐 Everyone can see published posts immediately.</p>
+                    <p>💾 No need to export or upload files anymore.</p>
                 </div>
             </div>
         </div>
@@ -189,6 +174,10 @@
         </footer>
     </div>
 
-    <script src="blog-manager.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="blog-manager-firebase.js"></script>
 </body>
 </html>

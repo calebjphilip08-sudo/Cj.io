@@ -1,12 +1,24 @@
-// Blog Overlay Display System
+// Blog Overlay Display System - Reads from Firebase
 (function() {
     let currentSort = 'recent';
     let allPosts = [];
 
-    // Load posts from localStorage
-    function loadPosts() {
-        const posts = localStorage.getItem('blogPosts');
-        return posts ? JSON.parse(posts) : [];
+    // Load posts from Firebase
+    async function loadPosts() {
+        try {
+            const snapshot = await db.collection('posts')
+                .where('category', '==', CATEGORY)
+                .where('status', '==', 'published')
+                .get();
+            
+            return snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+        } catch (error) {
+            console.log('Error loading posts:', error);
+            return [];
+        }
     }
 
     // Sort posts
@@ -15,10 +27,18 @@
         
         switch(currentSort) {
             case 'recent':
-                sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                sorted.sort((a, b) => {
+                    const aDate = a.createdAt?.toDate?.() || new Date(a.createdAt);
+                    const bDate = b.createdAt?.toDate?.() || new Date(b.createdAt);
+                    return bDate - aDate;
+                });
                 break;
             case 'oldest':
-                sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+                sorted.sort((a, b) => {
+                    const aDate = a.createdAt?.toDate?.() || new Date(a.createdAt);
+                    const bDate = b.createdAt?.toDate?.() || new Date(b.createdAt);
+                    return aDate - bDate;
+                });
                 break;
             case 'rating-high':
                 sorted.sort((a, b) => (b.rating || 0) - (a.rating || 0));
@@ -32,16 +52,13 @@
     }
 
     // Display posts
-    function displayPosts() {
-        allPosts = loadPosts().filter(p => 
-            p.status === 'published' && p.category === CATEGORY
-        );
-
+    async function displayPosts() {
+        allPosts = await loadPosts();
         const sortedPosts = sortPosts(allPosts);
         const container = document.getElementById('posts-grid');
 
         if (sortedPosts.length === 0) {
-            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">No posts yet. <a href="blog-manager.html" style="color: var(--accent); font-weight: 600;">Create your first post!</a></p>';
+            container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 2rem; color: #666;">No posts yet.</p>';
             return;
         }
 
@@ -156,8 +173,15 @@
     });
 
     // Format date
-    function formatDate(dateString) {
-        const date = new Date(dateString);
+    function formatDate(dateValue) {
+        let date;
+        if (dateValue?.toDate) {
+            date = dateValue.toDate();
+        } else if (dateValue) {
+            date = new Date(dateValue);
+        } else {
+            date = new Date();
+        }
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         return date.toLocaleDateString('en-US', options);
     }
@@ -185,9 +209,17 @@
         });
     }
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', function() {
+    // Initialize - wait for Firebase
+    if (typeof db !== 'undefined') {
         displayPosts();
         setupFilters();
-    });
+    } else {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait a bit for Firebase to load
+            setTimeout(() => {
+                displayPosts();
+                setupFilters();
+            }, 1000);
+        });
+    }
 })();
